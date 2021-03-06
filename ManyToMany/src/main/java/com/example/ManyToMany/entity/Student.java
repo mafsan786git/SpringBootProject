@@ -18,7 +18,8 @@ public class Student {
     private String studentName;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_Id"),
+    @JoinTable(name = "student_course",
+            joinColumns = @JoinColumn(name = "student_Id"),
             inverseJoinColumns = @JoinColumn(name = "course_Id"))
     private List<Course> courseList = new ArrayList<>();
 

@@ -18,26 +18,22 @@ public class ManyToManyApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	StudentService studentSer;
-
-	@Autowired
 	StudentRepository studentRepo;
 	@Autowired
 	CourseRepository courseRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
-		studentSer.insertCourse();
 		Course c1 = new Course(1L,"science");
 		Course c2 = new Course(2L,"math");
 		Course c3 = new Course(3L,"operating system");
-		this.courseRepo.save(c1);
-		this.courseRepo.save(c2);
-		this.courseRepo.save(c3);
+//		this.courseRepo.save(c1);
+//		this.courseRepo.save(c2);
+//		this.courseRepo.save(c3);
 //
 		Student s1 = new Student(8L,"afsan");
 
-		this.studentRepo.save(s1);
+//		this.studentRepo.save(s1);
 
 //
 		c1.addStudent(s1);

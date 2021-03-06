@@ -18,8 +18,8 @@ public class Course {
     @Id
     private Long courseId;
     private String courseName;
-
-    @ManyToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    /**mappedBy is mapped by the name which is define in onwer table */
+    @ManyToMany(mappedBy = "courseList",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Student> studentList = new ArrayList<>();
 
     public Course(Long courseId,String courseName){
