@@ -21,6 +21,10 @@ public class Blogs {
     @Column(nullable = false)
     private String blogDescription;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId",nullable = false)
+    private Users users;
+
     @ManyToMany(mappedBy = "blogList",cascade = CascadeType.ALL)
     private List<Categories> categoriesList = new ArrayList<>();
 
@@ -42,10 +46,5 @@ public class Blogs {
 
     public void setCategoriesList(List<Categories> categoriesList) {
         this.categoriesList = categoriesList;
-    }
-
-    public Blogs(String blogTopic, String blogDescription) {
-        this.blogTopic = blogTopic;
-        this.blogDescription = blogDescription;
     }
 }
