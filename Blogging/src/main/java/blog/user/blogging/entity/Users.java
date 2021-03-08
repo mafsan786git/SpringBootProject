@@ -1,10 +1,7 @@
 package blog.user.blogging.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,11 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
     private String userName;
 
     @Column(unique = true,nullable = false)
@@ -39,8 +37,8 @@ public class Users {
         return commentList;
     }
 
-    public void setCommentList(List<Comments> commentList) {
-        this.commentList = commentList;
+    public void setCommentList(Comments commentList) {
+        this.commentList.add(commentList);
     }
 
     public List<Blogs> getBlogList() {
@@ -51,11 +49,6 @@ public class Users {
         this.blogList.add(blog);
     }
 
-    public Users(String userName, String userMobile, String userEmail){
-        this.userEmail = userEmail;
-        this.userName = userName;
-        this.userMobile = userMobile;
-    }
 
     @Override
     public String toString() {

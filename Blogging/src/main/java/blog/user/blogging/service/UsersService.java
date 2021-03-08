@@ -13,24 +13,19 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Service
 public class UsersService {
     @Autowired
     UsersRepository userRepo;
+
     @Autowired
     BlogsRepository blogRepo;
-    public List<Users> getAllUsers() {
-        return userRepo.findAll();
-    }
 
     @Transactional
-    public List<Blogs> getUserBlogs(Long userId) {
-        Optional<Users> userProfile = userRepo.findById(userId);
-        if(userProfile.isEmpty())
-            return new ArrayList<>();
-        System.out.println(userProfile.toString());
-        return userProfile.get().getBlogList();
+    public List<Users> getAllUsers() {
+        return userRepo.findAll();
     }
 
     @Transactional
@@ -38,17 +33,15 @@ public class UsersService {
         return userRepo.findById(userId).get();
     }
 
-    public List<Comments> getUserComments(Long userId) {
-        Optional<Users> userProfile = userRepo.findById(userId);
-        if(userProfile.isEmpty())
-            return new ArrayList<>();
-        return userProfile.get().getCommentList();
-    }
     @Transactional
-    public Blogs addUserBlog(Long userId, Blogs blog) {
-        Users userProfile = userRepo.findById(userId).get();
-        userProfile.setBlogList(blog);
-        blog.setUsers(userProfile);
-        return blogRepo.save(blog);
+    public String addUser(Users userDetail) {
+        String userEmail = userDetail.getUserEmail();
+
+        List<Users> user = userRepo.findByUserEmail(userEmail);
+
+        if(!user.isEmpty())
+            return "Your detail is already exist.";
+        userRepo.save(userDetail);
+        return "Your detail is successfully added.";
     }
 }

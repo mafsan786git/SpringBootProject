@@ -40,15 +40,15 @@ public class Blogs {
         return commentList;
     }
 
-    public void setCommentList(List<Comments> commentList) {
-        this.commentList = commentList;
+    public void setCommentList(Comments commentList) {
+        this.commentList.add(commentList);
     }
 
     public List<Categories> getCategoriesList() {
         return categoriesList;
     }
 
-    public void setCategoriesList(List<Categories> categoriesList) {
-        this.categoriesList = categoriesList;
+    public void setCategoriesList(Categories categoriesList) {
+        this.categoriesList.add(categoriesList);
     }
 }

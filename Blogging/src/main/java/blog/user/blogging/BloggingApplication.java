@@ -11,23 +11,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @SpringBootApplication
-public class BloggingApplication implements CommandLineRunner {
+public class BloggingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BloggingApplication.class, args);
 	}
 
-	@Autowired
-	UsersService userServ;
-
-	@Override
-	@Transactional
-	public void run(String... args) throws Exception {
-//		List<Users> userList = userServ.getAllUsers();
-//		for(Users user : userList){
-//			System.out.println(user.toString());
-//		}
-		System.out.println(userServ.getUserBlogs(2L));
-		System.out.println("command Line runner");
-	}
 }

@@ -15,29 +15,20 @@ public class UsersController {
     @Autowired
     UsersService userServ;
 
-    @GetMapping("/allusers")
+    @GetMapping("/users")
     public List<Users> getAllUsers(){
         return userServ.getAllUsers();
     }
 
-    @GetMapping("/userbyid/{id}")
-    public Users getUserById(@PathVariable("id") Long userId)
-    {
+    @GetMapping("/userid/{id}")
+    public Users getUserById(@PathVariable("id") Long userId) {
         return userServ.getUserById(userId);
     }
 
-    @GetMapping("/userblogs/{id}")
-    public List<Blogs> getUserBlogs(@PathVariable("id") Long userId){
-        return userServ.getUserBlogs(userId);
-    }
-    @GetMapping("/usercomments/{id}")
-    public List<Comments> getUserComments(@PathVariable("id") Long userId){
-        return userServ.getUserComments(userId);
-    }
-
-    @PostMapping("/user/{id}/blog")
-    public Blogs addUserBlog(@PathVariable("id") Long userId, @RequestBody Blogs blog){
-        return userServ.addUserBlog(userId,blog);
+    @PostMapping("/adduser")
+    public String addUser(@RequestBody Users userDetail){
+        System.out.println(userDetail.toString());
+        return userServ.addUser(userDetail);
     }
 
 }
