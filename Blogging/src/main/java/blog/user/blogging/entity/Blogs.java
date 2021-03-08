@@ -1,5 +1,7 @@
 package blog.user.blogging.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class Blogs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +26,13 @@ public class Blogs {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId",nullable = false)
+    @JsonBackReference
     private Users users;
 
     @ManyToMany(mappedBy = "blogList",cascade = CascadeType.ALL)
     private List<Categories> categoriesList = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "blogcommentId",referencedColumnName = "blogId")
     private List<Comments> commentList = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package blog.user.blogging.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,10 +27,11 @@ public class Users {
     @Column(unique = true,nullable = false)
     private String userEmail;
 
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Blogs> blogList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "usercommentId",referencedColumnName = "userId")
     private List<Comments> commentList = new ArrayList<>();
 
@@ -45,8 +47,8 @@ public class Users {
         return this.blogList;
     }
 
-    public void setBlogList(List<Blogs> blogList) {
-        this.blogList = blogList;
+    public void setBlogList(Blogs blog) {
+        this.blogList.add(blog);
     }
 
     public Users(String userName, String userMobile, String userEmail){

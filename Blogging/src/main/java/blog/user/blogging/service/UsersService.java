@@ -1,8 +1,11 @@
 package blog.user.blogging.service;
 
 import blog.user.blogging.entity.Blogs;
+import blog.user.blogging.entity.Comments;
 import blog.user.blogging.entity.Users;
+import blog.user.blogging.repository.BlogsRepository;
 import blog.user.blogging.repository.UsersRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,8 @@ import java.util.Optional;
 public class UsersService {
     @Autowired
     UsersRepository userRepo;
-
-    @Transactional
+    @Autowired
+    BlogsRepository blogRepo;
     public List<Users> getAllUsers() {
         return userRepo.findAll();
     }
@@ -33,5 +36,19 @@ public class UsersService {
     @Transactional
     public Users getUserById(Long userId) {
         return userRepo.findById(userId).get();
+    }
+
+    public List<Comments> getUserComments(Long userId) {
+        Optional<Users> userProfile = userRepo.findById(userId);
+        if(userProfile.isEmpty())
+            return new ArrayList<>();
+        return userProfile.get().getCommentList();
+    }
+    @Transactional
+    public Blogs addUserBlog(Long userId, Blogs blog) {
+        Users userProfile = userRepo.findById(userId).get();
+        userProfile.setBlogList(blog);
+        blog.setUsers(userProfile);
+        return blogRepo.save(blog);
     }
 }

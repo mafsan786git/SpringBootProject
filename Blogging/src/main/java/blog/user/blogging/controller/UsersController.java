@@ -1,12 +1,11 @@
 package blog.user.blogging.controller;
 
 import blog.user.blogging.entity.Blogs;
+import blog.user.blogging.entity.Comments;
 import blog.user.blogging.entity.Users;
 import blog.user.blogging.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,9 +26,18 @@ public class UsersController {
         return userServ.getUserById(userId);
     }
 
-    @GetMapping("/user/{id}/blogs")
-    public List<Blogs> getUserAllBlogs(@PathVariable("id") Long userId){
+    @GetMapping("/userblogs/{id}")
+    public List<Blogs> getUserBlogs(@PathVariable("id") Long userId){
         return userServ.getUserBlogs(userId);
+    }
+    @GetMapping("/usercomments/{id}")
+    public List<Comments> getUserComments(@PathVariable("id") Long userId){
+        return userServ.getUserComments(userId);
+    }
+
+    @PostMapping("/user/{id}/blog")
+    public Blogs addUserBlog(@PathVariable("id") Long userId, @RequestBody Blogs blog){
+        return userServ.addUserBlog(userId,blog);
     }
 
 }
