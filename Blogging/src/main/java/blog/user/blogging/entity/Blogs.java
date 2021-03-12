@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "commentList"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "commentList","categoriesList","users"})
 public class Blogs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +35,6 @@ public class Blogs {
     @OneToMany(mappedBy = "blogs",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comments> commentList = new ArrayList<>();
 
-
-    @JsonIgnore
     public Users getUsers() {
         return this.users;
     }

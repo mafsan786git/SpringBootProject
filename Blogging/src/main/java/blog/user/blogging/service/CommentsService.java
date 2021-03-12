@@ -5,6 +5,7 @@ import blog.user.blogging.entity.Comments;
 import blog.user.blogging.entity.Users;
 import blog.user.blogging.repository.BlogsRepository;
 import blog.user.blogging.repository.CommentsRepository;
+import blog.user.blogging.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class CommentsService {
     @Autowired
     BlogsRepository blogRepo;
+    @Autowired
+    UsersRepository userRepo;
 
     @Autowired
     BlogsService blogServ;
@@ -46,7 +49,9 @@ public class CommentsService {
         comment.setBlogs(blog);
         commentRepo.save(comment);
         blog.setCommentList(comment);
+        blogRepo.save(blog);
         user.setCommentList(comment);
+        userRepo.save(user);
         return "added successfully";
     }
 

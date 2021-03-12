@@ -69,7 +69,6 @@ public class BlogsService {
         Optional<Blogs> blog = blogsRepository.findById(blogId);
         if(blog.isEmpty())
             return null;
-        System.out.println(blog.get().getUsers().getClass().getName());
         return blog.get().getUsers();
     }
 }

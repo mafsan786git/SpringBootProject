@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "users","blogs"})
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,11 @@ public class Comments {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Blogs blogs;
 
-    public Long userId(){
+    public Long getUserId(){
         return this.users.getUserId();
     }
 
-    public Long blogId(){
+    public Long getBlogId(){
         return this.blogs.getBlogId();
     }
 }
