@@ -24,19 +24,29 @@ public class OneToManyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Review r1 = new Review(78L,4L,"very good subject as math");
-		Review r2 = new Review(79L,5L,"very good subject interesting");
-		Review r3 = new Review(80L,6L,"very good subject");
-
 		Course c = new Course(123L,"Maths");
+		Review r1 = new Review(78L,4L,"very good subject as math",c);
+		Review r2 = new Review(79L,5L,"very good subject interesting",c);
+		Review r3 = new Review(80L,6L,"very good subject",c);
 
 		c.addReview(r1);
-		r1.setCourse(c);
 		c.addReview(r2);
-		r2.setCourse(c);
 		c.addReview(r3);
-		r3.setCourse(c);
+
 		this.courseRepo.save(c);
+//
+//		r1.setCourse(c);
+////		c.addReview(r1);
+		this.reviewRepo.save(r1);
+//
+//		r2.setCourse(c);
+////		c.addReview(r2);
+		this.reviewRepo.save(r2);
+//
+//		r3.setCourse(c);
+////		c.addReview(r3);
+		this.reviewRepo.save(r3);
+
 	}
 
 

@@ -31,10 +31,11 @@ public class Review {
     }
 
     public Review(){}
-    public Review(Long reviewId, Long rating, String description) {
+    public Review(Long reviewId, Long rating, String description,Course course) {
         this.reviewId = reviewId;
         this.rating = rating;
         this.description = description;
+        this.course = course;
     }
 
     public Long getReviewId() {

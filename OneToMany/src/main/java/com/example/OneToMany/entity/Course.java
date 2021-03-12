@@ -48,9 +48,9 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public List<Review> getReview() {
-        return reviewList;
-    }
+//    public List<Review> getReview() {
+//        return reviewList;
+//    }
     public void addReview(Review review) {
         this.reviewList.add(review);
     }

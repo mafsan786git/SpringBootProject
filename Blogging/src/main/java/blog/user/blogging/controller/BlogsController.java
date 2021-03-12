@@ -1,6 +1,7 @@
 package blog.user.blogging.controller;
 
 import blog.user.blogging.entity.Blogs;
+import blog.user.blogging.entity.Users;
 import blog.user.blogging.repository.BlogsRepository;
 import blog.user.blogging.service.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class BlogsController {
     @PostMapping("/adduserblog/{id}")
     public String addUserBlog(@PathVariable("id") Long userId, @RequestBody Blogs blog){
         return blogServ.addUserBlog(userId,blog);
+    }
+
+    @GetMapping("/blog/{id}/user")
+    public Users getUserOfBlog(@PathVariable("id") Long blogId){
+        return blogServ.getUserOfBlog(blogId);
     }
 }

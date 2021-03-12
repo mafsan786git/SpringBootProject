@@ -1,5 +1,6 @@
 package blog.user.blogging.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "commentList","blogList"})
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +28,14 @@ public class Users {
     private String userEmail;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Blogs> blogList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "usercommentId",referencedColumnName = "userId")
+    @OneToMany(mappedBy = "users",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comments> commentList = new ArrayList<>();
 
+
+
+    //all getter and setter
     public List<Comments> getCommentList() {
         return commentList;
     }

@@ -30,7 +30,9 @@ public class UsersService {
 
     @Transactional
     public Users getUserById(Long userId) {
-        return userRepo.findById(userId).get();
+        Users user = userRepo.findById(userId).get();
+        System.out.println("user bloglist -- " + user.getBlogList());
+        return user;
     }
 
     @Transactional
@@ -43,5 +45,12 @@ public class UsersService {
             return "Your detail is already exist.";
         userRepo.save(userDetail);
         return "Your detail is successfully added.";
+    }
+
+    @Transactional
+    public List<Blogs> userBlogsById(Long userId) {
+        Users user = userRepo.findById(userId).get();
+
+        return user.getBlogList();
     }
 }

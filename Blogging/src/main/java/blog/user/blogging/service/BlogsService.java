@@ -7,6 +7,7 @@ import blog.user.blogging.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -47,14 +48,28 @@ public class BlogsService {
         if (userProfile.isEmpty())
             return "user is not found";
         blog.setUsers(userProfile.get());
-        userProfile.get().setBlogList(blog);
+//        System.out.println(blog.toString());
         blogsRepository.save(blog);
+        userProfile.get().setBlogList(blog);
+        userRepo.save(userProfile.get());
         return "blog added successfully";
     }
 
     @Transactional
     public Blogs getBlogById(Long blogId) {
         Optional<Blogs> blog = blogsRepository.findById(blogId);
-        return blog.orElseGet(blog::get);
+        if(blog.isEmpty())
+            return null;
+        System.out.println(blog.get().getUsers());
+        return blog.get();
+    }
+
+    @Transactional
+    public Users getUserOfBlog(Long blogId) {
+        Optional<Blogs> blog = blogsRepository.findById(blogId);
+        if(blog.isEmpty())
+            return null;
+        System.out.println(blog.get().getUsers().getClass().getName());
+        return blog.get().getUsers();
     }
 }
