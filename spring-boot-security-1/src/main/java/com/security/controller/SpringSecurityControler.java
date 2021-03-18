@@ -8,6 +8,6 @@ public class SpringSecurityControler {
 
     @GetMapping("/")
     public String welcome(){
-        return "WELCOME";
+        return "WELCOME TO THE HOME PAGE";
     }
 }
